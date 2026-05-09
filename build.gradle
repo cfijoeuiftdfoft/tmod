@@ -190,3 +190,22 @@ idea {
         downloadJavadoc = true
     }
 }
+
+tasks.register('rewriteFileInMinecraft', Copy) {
+    dependsOn 'jar'
+    from layout.buildDirectory.file('libs/%s-%s.jar'.formatted(project.name, project.version))
+    
+    into 'C:/Users/kompu/AppData/Roaming/.minecraft/versions/testneoforgemod0/mods'
+    
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.register("deploy") {
+    dependsOn 'clean', 'build', 'rewriteFileInMinecraft'
+    description = 'все и сразу'
+    outputs.upToDateWhen { false }
+}
+
+/*tasks.named('build').configure {
+    finalizedBy('copyJarToServer')
+}*/
