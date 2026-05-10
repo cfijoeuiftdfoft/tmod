@@ -13,6 +13,7 @@ out/
 !**/src/**/out/
 
 .run/
+Текстовый документ.txt
 
 ### Eclipse ###
 .apt_generated

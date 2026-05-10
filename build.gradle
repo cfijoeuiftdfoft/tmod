@@ -201,11 +201,11 @@ tasks.register('rewriteFileInMinecraft', Copy) {
 }
 
 tasks.register("deploy") {
+    group = "build"
     dependsOn 'clean', 'build', 'rewriteFileInMinecraft'
     description = 'все и сразу'
     outputs.upToDateWhen { false }
 }
 
-/*tasks.named('build').configure {
-    finalizedBy('copyJarToServer')
-}*/
+//./gradlew --refresh-dependencies
+
