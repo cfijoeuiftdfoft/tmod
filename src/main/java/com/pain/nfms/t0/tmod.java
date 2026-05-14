@@ -58,12 +58,14 @@ public class tmod {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
+    @SuppressWarnings("null")
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(TItems.I0);
         }
     }
     
+    @SuppressWarnings("null")
     private void commonSetup(FMLCommonSetupEvent event) {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");

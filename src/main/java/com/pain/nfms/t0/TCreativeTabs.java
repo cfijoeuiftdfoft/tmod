@@ -8,8 +8,10 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.minecraft.network.chat.Component;
 
 public class TCreativeTabs {
+    @SuppressWarnings("null")
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, tmod.MODID);
 
+    @SuppressWarnings("null")
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_MODE_TAB_0 = CREATIVE_MODE_TABS.register(
         "ct0",
         () -> CreativeModeTab.builder()

@@ -1,0 +1,13 @@
+{
+  "itemGroup.tmod": "Example Mod Tab",
+  "block.tmod.example_block": "Example Block",
+  "item.tmod.i0": "67",
+
+  "tmod.configuration.title": " tmod Configs",
+  "tmod.configuration.section.tmod.common.toml": " tmod Configs",
+  "tmod.configuration.section.tmod.common.toml.title": " tmod Configs",
+  "tmod.configuration.items": "Item List",
+  "tmod.configuration.logDirtBlock": "Log Dirt Block",
+  "tmod.configuration.magicNumberIntroduction": "Magic Number Text",
+  "tmod.configuration.magicNumber": "Magic Number"
+}

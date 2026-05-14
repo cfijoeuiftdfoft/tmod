@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.SoundType;
 public class TBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(tmod.MODID);
 
+    @SuppressWarnings("null")
     public static final DeferredBlock<Block> B0 = BLOCKS.register(
     "b0", 
         () -> new Block(BlockBehaviour.Properties.of()
