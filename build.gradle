@@ -202,7 +202,7 @@ tasks.register('rewriteFileInMinecraft', Copy) {
 
 tasks.register("deploy") {
     group = "build"
-    dependsOn 'clean', 'build', 'rewriteFileInMinecraft'
+    dependsOn 'build', 'rewriteFileInMinecraft'
     description = 'все и сразу'
     outputs.upToDateWhen { false }
 }

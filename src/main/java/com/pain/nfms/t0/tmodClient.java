@@ -1,19 +1,20 @@
 package com.pain.nfms.t0;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent; // <- Импорт события
 
-// This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = tmod.MODID, dist = Dist.CLIENT)
-// You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-@EventBusSubscriber(modid = tmod.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = "tmod", bus = Bus.MOD, value = Dist.CLIENT)
 public class tmodClient {
     public tmodClient(ModContainer container) {
         // Allows NeoForge to create a config screen for this mod's configs.
@@ -27,5 +28,17 @@ public class tmodClient {
         // Some client setup code
         tmod.LOGGER.info("HELLO FROM CLIENT SETUP");
         tmod.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+    }
+
+    // ДОБАВЬ ЭТОТ МЕТОД: он регистрирует рендерер для твоей сущности
+    @SubscribeEvent
+    @SuppressWarnings("null")
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(TModelLayers.RebroModelLocation, RebroModel::createBodyLayer);
+    }
+    
+    @SubscribeEvent
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(TEntities.REBRO.get(), RebroRenderer::new);
     }
 }
