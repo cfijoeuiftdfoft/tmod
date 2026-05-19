@@ -4,10 +4,12 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.AllayRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.model.AllayModel;
 
-public class RebroRenderer extends HumanoidMobRenderer<Rebro, RebroModel<Rebro>> {
+public class RebroRenderer extends MobRenderer<Rebro, RebroModel<Rebro>> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("tmod", "textures/entity/rebro.png");
 
     public RebroRenderer(EntityRendererProvider.Context context) {
