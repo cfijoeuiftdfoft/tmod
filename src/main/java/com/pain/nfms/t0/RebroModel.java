@@ -22,8 +22,10 @@ public class RebroModel<T extends LivingEntity> extends HierarchicalModel<T> {
     private final ModelPart left_arm;
     private final ModelPart right_wing;
     private final ModelPart left_wing;
-    private final ModelPart right_leg;
-    private final ModelPart left_leg;
+    private final ModelPart right_hip;
+    private final ModelPart left_hip;
+    private final ModelPart right_shin;
+    private final ModelPart left_shin;
 
     public RebroModel(ModelPart root) {
         this.root = root.getChild("root");
@@ -33,14 +35,16 @@ public class RebroModel<T extends LivingEntity> extends HierarchicalModel<T> {
         this.left_arm = this.body.getChild("left_arm");
         this.right_wing = this.body.getChild("right_wing");
         this.left_wing = this.body.getChild("left_wing");
-        this.left_leg = this.body.getChild("left_leg");
-        this.right_leg = this.body.getChild("right_leg");
+        this.left_hip = this.body.getChild("left_hip");
+        this.right_hip = this.body.getChild("right_hip");
+        this.left_shin = this.left_hip.getChild("left_shin");
+        this.right_shin = this.right_hip.getChild("right_shin");
     }
 
     public ModelPart root() {
       return this.root;
    }
-
+// shin hip
     public static LayerDefinition createBodyLayer() {
         MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
         PartDefinition rroot = mesh.getRoot();
@@ -52,8 +56,11 @@ public class RebroModel<T extends LivingEntity> extends HierarchicalModel<T> {
         body.addOrReplaceChild("left_arm", CubeListBuilder.create().texOffs(23, 6).addBox(-0.25F, -0.5F, -1.0F, 1.0F, 4.0F, 2.0F, new CubeDeformation(-0.01F)), PartPose.offset(1.75F, 0.5F, 0.0F));
         body.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(16, 14).addBox(0.0F, 1.0F, 0.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.5F, 0.0F, 0.6F));
         body.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(16, 14).addBox(0.0F, 1.0F, 0.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 0.0F, 0.6F));
-        body.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.5F, 12.0F, 0));
-        body.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(5.5F, 12.0F, 0));
+        PartDefinition right_hip = body.addOrReplaceChild("right_hip", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 12.0F, 0.0F));
+        PartDefinition left_hip = body.addOrReplaceChild("left_hip", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 12.0F, 0.0F));
+
+        right_hip.addOrReplaceChild("right_shin", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.5F, 12.0F, 0));
+        left_hip.addOrReplaceChild("left_shin", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(5.5F, 12.0F, 0));
 
         return LayerDefinition.create(mesh, 8, 8);
     }

@@ -39,6 +39,7 @@ import net.neoforged.fml.ModContainer;
 // import net.neoforged.neoforge.registries.DeferredHolder;
 // import net.neoforged.neoforge.registries.DeferredItem;
 // import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.client.renderer.GameRenderer;
 
 @Mod(tmod.MODID)
 public class tmod {

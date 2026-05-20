@@ -20,6 +20,6 @@ public class TItems {
         .alwaysEdible()
         .nutrition(1)
         .saturationModifier(2f)
-        .build())
+        .build()), TEntities.REBRO.get()
     ));
 }
