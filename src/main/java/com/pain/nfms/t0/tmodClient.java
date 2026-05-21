@@ -1,7 +1,7 @@
 package com.pain.nfms.t0;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.ZombieRenderer;
+// import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -11,7 +11,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent; // <- Импорт события
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 @Mod(value = tmod.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = "tmod", bus = Bus.MOD, value = Dist.CLIENT)
@@ -30,7 +30,6 @@ public class tmodClient {
         tmod.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
     }
 
-    // ДОБАВЬ ЭТОТ МЕТОД: он регистрирует рендерер для твоей сущности
     @SubscribeEvent
     @SuppressWarnings("null")
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -38,6 +37,7 @@ public class tmodClient {
     }
     
     @SubscribeEvent
+    @SuppressWarnings("null")
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(TEntities.REBRO.get(), RebroRenderer::new);
     }

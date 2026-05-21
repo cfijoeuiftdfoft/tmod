@@ -1,7 +1,7 @@
 package com.pain.nfms.t0;
 
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
+// import net.neoforged.bus.api.SubscribeEvent;
+// import net.neoforged.fml.common.EventBusSubscriber;
 // import net.neoforged.jarjar.nio.util.LambdaExceptionUtils.Supplier_WithExceptions;
 // import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -12,9 +12,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 // import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
+// import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+// import net.neoforged.bus.api.SubscribeEvent;
+// import net.neoforged.fml.common.EventBusSubscriber;
 
 public class TEntities {
     @SuppressWarnings("null")
@@ -25,12 +25,4 @@ public class TEntities {
         .sized(0.9f, 1.5f)
         .build("rebro")
     );
-
-    @EventBusSubscriber(modid = tmod.MODID, bus = EventBusSubscriber.Bus.MOD)
-    public static class Registration {
-        @SubscribeEvent
-        public static void registerAttributes(EntityAttributeCreationEvent event) {
-            event.put(REBRO.get(), Rebro.createAttributes().build());
-        }
-    }
 }

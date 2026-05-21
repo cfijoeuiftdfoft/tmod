@@ -195,7 +195,7 @@ tasks.register('rewriteFileInMinecraft', Copy) {
     dependsOn 'jar'
     from layout.buildDirectory.file('libs/%s-%s.jar'.formatted(project.name, project.version))
     
-    into 'C:/Users/student/Documents/tl/PortableTL for distro/JavaPortableLauncher/Data/AppData/.minecraft/versions/tttt/mods'
+    into 'C:/Users/kompu/AppData/Roaming/.minecraft/versions/testneoforgemod0/mods'
     
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
