@@ -56,6 +56,12 @@ public class RebroModel extends HierarchicalModel<Rebro> {
     public ModelPart root() {
       return this.root;
    }
+   /*
+   i ld
+   128 128 64 64
+   256 256 32 32
+   512 512 16 16
+   */
 
    @SuppressWarnings("null")
     public static LayerDefinition createBodyLayer() {
@@ -68,14 +74,23 @@ public class RebroModel extends HierarchicalModel<Rebro> {
         MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
         PartDefinition rroot = mesh.getRoot();
 
+        /*
+        8 - 128 127
+        4 - 64 63
+        12 - 192 191
+        */
+
         PartDefinition root = rroot.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-        root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.99F + yOffset, 0.0F)); // head
-        PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -4.0F + yOffset, 0.0F)); // body
+        root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F + yOffset, 0.0F)); // head
+        PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F + yOffset, 0.0F)); // body
 
-        body.addOrReplaceChild("right_arm",  CubeListBuilder.create().texOffs(0, 0)         .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(-0.01F)), PartPose.offset(-5.0F, 2.0F + yOffset, 0.0F)); // arms r
-        body.addOrReplaceChild("left_arm",   CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(-0.01F)), PartPose.offset(5.0F, 2.0F + yOffset, 0.0F));
+        // 64 64 64 64
+        // 192
 
-        body.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(0, 0)         .addBox(0.0F, 1.0F, 0.0F, 0.0F, 32.0F, 32.0F, new CubeDeformation(0.0F)),     PartPose.offsetAndRotation(0.0F, 0.0F + yOffset, 0.0F, r15, 0.0F, 0.0F)); // wings r
+        body.addOrReplaceChild("right_arm",  CubeListBuilder.create().texOffs(0, 16).mirror().addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(-0.01F)), PartPose.offset(-5.0F, 2.0F + yOffset, 0.0F)); // arms r
+        body.addOrReplaceChild("left_arm",   CubeListBuilder.create().texOffs(0, 16).addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(-0.01F)), PartPose.offset(5.0F, 2.0F + yOffset, 0.0F));
+
+        body.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 1.0F, 0.0F, 0.0F, 32.0F, 32.0F, new CubeDeformation(0.0F)),     PartPose.offsetAndRotation(0.0F, 0.0F + yOffset, 0.0F, r15, 0.0F, 0.0F)); // wings r
         body.addOrReplaceChild("left_wing",  CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, 1.0F, 0.0F, 0.0F, 32.0F, 32.0F, new CubeDeformation(0.0F)),     PartPose.offsetAndRotation(0.0F, 0.0F + yOffset, 0.0F, rn15, 0.0F, 0.0F));
         // PartDefinition right_hip = body.addOrReplaceChild("right_hip", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 12.0F, 0.0F));
         // PartDefinition left_hip = body.addOrReplaceChild("left_hip", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 12.0F, 0.0F));
@@ -83,9 +98,10 @@ public class RebroModel extends HierarchicalModel<Rebro> {
         // right_hip.addOrReplaceChild("right_shin", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.5F, 12.0F, 0));
         // left_hip.addOrReplaceChild("left_shin", CubeListBuilder.create().texOffs(16, 14).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(5.5F, 12.0F, 0));
 
-        body.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 0)        .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.9F, 12.0F + yOffset, 0.0F)); // legs r
-        body.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(1.9F, 12.0F + yOffset, 0.0F));
-        return LayerDefinition.create(mesh, 128, 128);
+        body.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(16, 16)        .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-1.9F, 12.0F + yOffset, 0.0F)); // legs r
+        body.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(16, 16).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(1.9F, 12.0F + yOffset, 0.0F));
+        int xy = 64;
+        return LayerDefinition.create(mesh, xy, xy);
     }
 
     public void setupAnim(@Nonnull Rebro entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
