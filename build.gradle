@@ -191,7 +191,7 @@ idea {
     }
 }
 
-tasks.register('rewriteFileInMinecraft', Copy) {
+tasks.register('copyFileToMinecraft__HOME', Copy) {
     dependsOn 'jar'
     from layout.buildDirectory.file('libs/%s-%s.jar'.formatted(project.name, project.version))
     
@@ -200,9 +200,25 @@ tasks.register('rewriteFileInMinecraft', Copy) {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
-tasks.register("deploy") {
+tasks.register('copyFileToMinecraft__FLESH', Copy) {
+    dependsOn 'jar'
+    from layout.buildDirectory.file('libs/%s-%s.jar'.formatted(project.name, project.version))
+    
+    into 'C:/Users/student/Documents/tl/PortableTL for distro/JavaPortableLauncher/Data/AppData/.minecraft/versions/67/mods'
+    
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.register("deploy__HOME") {
     group = "build"
-    dependsOn 'build', 'rewriteFileInMinecraft'
+    dependsOn 'build', 'copyFileToMinecraft__HOME'
+    description = 'все и сразу'
+    outputs.upToDateWhen { false }
+}
+
+tasks.register("deploy__FLESH") {
+    group = "build"
+    dependsOn 'build', 'copyFileToMinecraft__FLESH'
     description = 'все и сразу'
     outputs.upToDateWhen { false }
 }
