@@ -63,18 +63,9 @@ public class Rebro extends TamableAnimal {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new BreedGoal(this, 1.0f, Wolf.class));
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        
-        // 1: Атака (нужна чтобы двигался К цели)
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, true));
-        
-        // 2: Случайное движение (БЕЗ этого не будет ходить!)
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8));
-        
-        // 4: Случайно оглядывается
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-        
-        // Цели для атаки (target goals)
-        // Атакует того, кто ударил
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(0, new NoBabyAtackGoal<>(this, Villager.class, true));
     }
