@@ -1,5 +1,11 @@
 package com.pain.nfms.t0;
 
+import java.util.function.Consumer;
+
+import javax.annotation.Nonnull;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
@@ -13,17 +19,19 @@ import net.minecraft.world.level.Level;
 // import net.minecraft.world.level.block.Blocks;
 // import net.minecraft.world.level.block.Block;
 // import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.ClientHooks.ClientEvents;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-public class I0class extends Item {
+public class Metla extends Item {
     private final EntityType<?> entityType;
-    public I0class(Properties properties, EntityType<?> entityType) {
+    public Metla(Properties properties, EntityType<?> entityType) {
         super(properties);
         this.entityType = entityType;
     }
 
     @Override
-    @SuppressWarnings("null")
-    public InteractionResult useOn(UseOnContext context) {
+    // @SuppressWarnings("null")
+    public InteractionResult useOn(@Nonnull UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         // BlockState oldState = level.getBlockState(pos);
@@ -42,5 +50,22 @@ public class I0class extends Item {
         }
 
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            private MetlaRenderer renderer;
+            
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (renderer == null) {
+                    var modelPart = Minecraft.getInstance().getEntityModels()
+                        .bakeLayer(TModelLayers.METLA_LAYER);
+                    renderer = new MetlaRenderer(new MetlaModel(modelPart));
+                }
+                return renderer;
+            }
+        });
     }
 }

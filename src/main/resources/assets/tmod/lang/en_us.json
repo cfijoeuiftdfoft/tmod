@@ -1,7 +1,8 @@
 {
   "itemGroup.tmod.ct0": "Example Mod Tab",
   "block.tmod.example_block": "Example Block",
-  "item.tmod.i0": "67",
+  "item.tmod.metla": "67",
+  "entity.tmod.rebro": "Xyi",
 
   "tmod.configuration.title": " tmod Configs",
   "tmod.configuration.section.tmod.common.toml": " tmod Configs",

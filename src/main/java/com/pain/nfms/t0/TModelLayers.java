@@ -6,4 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 public class TModelLayers {
     @SuppressWarnings("null")
     public static final ModelLayerLocation RebroModelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("tmod", "rebro"), "main");
+
+    public static final ModelLayerLocation METLA_LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("tmod", "metla"), "main");
 }

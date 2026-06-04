@@ -65,7 +65,7 @@ public class tmod {
     @SuppressWarnings("null")
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(TItems.I0);
+            event.accept(TItems.METLA);
         }
     }
     

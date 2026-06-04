@@ -16,9 +16,9 @@ public class TCreativeTabs {
         "ct0",
         () -> CreativeModeTab.builder()
         .title(Component.translatable("itemGroup." + tmod.MODID + ".example"))
-        .icon(() -> new ItemStack(TItems.I0.get()))
+        .icon(() -> new ItemStack(TItems.METLA.get()))
         .displayItems((parameters, output) -> {
-            output.accept(TItems.I0.get());
+            output.accept(TItems.METLA.get());
         })
         .build()
     );

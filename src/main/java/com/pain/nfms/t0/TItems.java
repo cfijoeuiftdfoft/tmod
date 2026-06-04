@@ -11,9 +11,9 @@ public class TItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(tmod.MODID);
 
     @SuppressWarnings("null")
-    public static final DeferredItem<Item> I0 = ITEMS.register(
-        "i0",
-        () ->  new I0class(new Item.Properties()
+    public static final DeferredItem<Item> METLA = ITEMS.register(
+        "metla",
+        () ->  new Metla(new Item.Properties()
         .stacksTo(67)
         .rarity(Rarity.RARE)
         .food(new FoodProperties.Builder()
