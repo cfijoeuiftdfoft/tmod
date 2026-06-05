@@ -36,6 +36,7 @@ public class tmodClient {
     @SuppressWarnings("null")
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(TModelLayers.RebroModelLocation, RebroModel::createBodyLayer);
+        event.registerLayerDefinition(TModelLayers.METLA_LAYER, MetlaModel::createLayer);
     }
     
     @SubscribeEvent

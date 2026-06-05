@@ -18,6 +18,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
     private final MetlaModel model;
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("tmod", "textures/item/Metla.png");
 
     public MetlaRenderer(MetlaModel model) {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
