@@ -35,7 +35,7 @@ public class MetlaModel extends Model {
         PartDefinition root = rroot.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
         PartDefinition stick = root.addOrReplaceChild("stick", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -32.0F, -3.0F, 6.0F, 64.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        stick.addOrReplaceChild("v0", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -10.0F, -3.0F, 20.0F, 20.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 30.0F, 0.0F));
+        stick.addOrReplaceChild("v0", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -10.0F, -3.0F, 20.0F, 20.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(-10.0F, 30.0F, 0.0F));
         
         return LayerDefinition.create(mesh, 16, 16);
     }
