@@ -18,7 +18,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
     private final MetlaModel model;
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("tmod", "textures/item/Metla.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("tmod", "textures/item/metla.png");
 
     public MetlaRenderer(MetlaModel model) {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
@@ -29,7 +29,6 @@ public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
     public void renderByItem(@Nonnull ItemStack stack, @Nonnull ItemDisplayContext transformType, @Nonnull PoseStack poseStack, @Nonnull MultiBufferSource buffer, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         
-        // Масштабирование и позиционирование в зависимости от контекста отображения
         switch (transformType) {
             case GUI:
                 poseStack.scale(1.2F, 1.2F, 1.2F);
@@ -43,7 +42,7 @@ public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
                 break;
             case FIRST_PERSON_RIGHT_HAND:
             case FIRST_PERSON_LEFT_HAND:
-                poseStack.translate(0.5F, 0.3F, 0.5F);
+                poseStack.translate(0.0F, 1.0F, 0.0F);
                 poseStack.scale(0.7F, 0.7F, 0.7F);
                 break;
             default:
@@ -52,9 +51,6 @@ public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
         
         VertexConsumer vertexConsumer = ItemRenderer.getFoilBuffer(buffer, this.model.renderType(TEXTURE), false, stack.hasFoil());
         this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 0xFFFFFFFF);
-        
         poseStack.popPose();
     }
-
-    
 }

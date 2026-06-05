@@ -120,16 +120,13 @@ public class RebroModel extends HierarchicalModel<Rebro> {
     }
 
     public void setupAnim(@Nonnull Rebro entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        
-        // СБРОС - возвращаем руки в базовое положение
-        this.rightArm.x = -5.0F;  // исходная позиция из модели
+        this.rightArm.x = -5.0F;
         this.rightArm.y = 2.0F;
         this.rightArm.z = 0.0F;
         this.leftArm.x = 5.0F;
         this.leftArm.y = 2.0F;
         this.leftArm.z = 0.0F;
         
-        // Сброс ротаций
         this.rightArm.xRot = 0.0F;
         this.rightArm.yRot = 0.0F;
         this.rightArm.zRot = 0.0F;
@@ -139,7 +136,6 @@ public class RebroModel extends HierarchicalModel<Rebro> {
         
         this.body.yRot = 0.0F;
         
-        // Базовая анимация ходьбы (если нужна)
         float legSwing = Mth.cos(limbSwing) * limbSwingAmount * 0.8F;
         this.rightLeg.xRot = legSwing;
         this.leftLeg.xRot = -legSwing;
@@ -148,12 +144,8 @@ public class RebroModel extends HierarchicalModel<Rebro> {
         this.rightArm.xRot = armSwing * 0.6F;
         this.leftArm.xRot = -armSwing * 0.6F;
         
-        // Анимация атаки (поверх базовой)
         this.attackTime = entity.getAttackAnim(this.partialTick);
-        if (this.attackTime > 0.01f) {
-            System.out.println(this.attackTime);
-            this.setupAttackAnimation(entity, ageInTicks);
-        }
+        this.setupAttackAnimation(entity, ageInTicks);
     }
 
     protected ModelPart getArm(HumanoidArm side) {
@@ -166,9 +158,7 @@ public class RebroModel extends HierarchicalModel<Rebro> {
     }
 
     protected void setupAttackAnimation(Rebro livingEntity, float ageInTicks) {
-        // System.out.println("preattack");
         if (!(this.attackTime <= 0.0F)) {
-            System.out.println("attack");
             HumanoidArm humanoidarm = this.getAttackArm(livingEntity);
             ModelPart modelpart = this.getArm(humanoidarm);
             float f = this.attackTime;

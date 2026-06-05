@@ -68,48 +68,18 @@ public class Rebro extends TamableAnimal {
         return true;
     }
 
-//     public void swing(@Nonnull InteractionHand hand, boolean updateSelf) {
-//         super.swing(hand, updateSelf);
-//         System.out.println("swing");
-//         System.out.println(this.swingTime);
-//         System.out.println(this.swinging);
-//         ItemStack stack = this.getItemInHand(hand);
-//         if (stack.isEmpty() || !stack.onEntitySwing(this, hand)) {
-//             System.out.println("swing2");
-//             if (!this.swinging || this.swingTime >= this.getCurrentSwingDuration() / 2 || this.swingTime < 0) {
-//                 System.out.println("swing3");
-//                 this.swingTime = -1;
-//                 this.swinging = true;
-//                 this.swingingArm = hand;
-//                 if (this.level() instanceof ServerLevel) {
-//                 ClientboundAnimatePacket clientboundanimatepacket = new ClientboundAnimatePacket(this, hand == InteractionHand.MAIN_HAND ? 0 : 3);
-//                 ServerChunkCache serverchunkcache = ((ServerLevel)this.level()).getChunkSource();
-//                 if (updateSelf) {
-//                     serverchunkcache.broadcastAndSend(this, clientboundanimatepacket);
-//                 } else {
-//                     serverchunkcache.broadcast(this, clientboundanimatepacket);
-//                 }
-//                 }
-//             }
-
-//         }
-//    }
-
     @Override
     public boolean doHurtTarget(@Nonnull Entity target) {
         System.out.println("dohurttarget");
         boolean hurt = super.doHurtTarget(target);
         System.out.println(getCurrentSwingDuration());
-        // if (hurt) {
-        //     System.out.println("dht2");
-        //     this.swing(InteractionHand.MAIN_HAND);
-        // }
         return hurt;
     }
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new BreedGoal(this, 1.0f, Wolf.class));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0f, Wolf.class));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0f));
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, true));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8));

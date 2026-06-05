@@ -30,7 +30,7 @@ public class Metla extends Item {
     }
 
     @Override
-    // @SuppressWarnings("null")
+    @SuppressWarnings("null")
     public InteractionResult useOn(@Nonnull UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
@@ -52,20 +52,20 @@ public class Metla extends Item {
         return InteractionResult.SUCCESS;
     }
 
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            private MetlaRenderer renderer;
+    // @Override
+    // public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+    //     consumer.accept(new IClientItemExtensions() {
+    //         private MetlaRenderer renderer;
             
-            @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                if (renderer == null) {
-                    var modelPart = Minecraft.getInstance().getEntityModels()
-                        .bakeLayer(TModelLayers.METLA_LAYER);
-                    renderer = new MetlaRenderer(new MetlaModel(modelPart));
-                }
-                return renderer;
-            }
-        });
-    }
+    //         @Override
+    //         public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+    //             if (renderer == null) {
+    //                 var modelPart = Minecraft.getInstance().getEntityModels()
+    //                     .bakeLayer(TModelLayers.METLA_LAYER);
+    //                 renderer = new MetlaRenderer(new MetlaModel(modelPart));
+    //             }
+    //             return renderer;
+    //         }
+    //     });
+    // }
 }
