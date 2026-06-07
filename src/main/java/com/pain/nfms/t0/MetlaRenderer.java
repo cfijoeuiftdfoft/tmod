@@ -30,24 +30,40 @@ public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
         poseStack.pushPose();
         
         switch (transformType) {
-            case GUI:
-                poseStack.scale(1.2F, 1.2F, 1.2F);
-                poseStack.translate(0F, -0.1F, 0F);
-                break;
-            case THIRD_PERSON_RIGHT_HAND:
-            case THIRD_PERSON_LEFT_HAND:
-                poseStack.mulPose(Axis.YP.rotationDegrees(180));
-                poseStack.translate(0.1F, -0.2F, -0.1F);
-                poseStack.scale(0.8F, 0.8F, 0.8F);
-                break;
-            case FIRST_PERSON_RIGHT_HAND:
-            case FIRST_PERSON_LEFT_HAND:
-                poseStack.translate(0.0F, 1.0F, 0.0F);
-                poseStack.scale(0.7F, 0.7F, 0.7F);
-                break;
-            default:
-                break;
-        }
+        case GUI: // Инвентарь
+            poseStack.scale(1.5F, 1.5F, 1.5F);
+            poseStack.translate(0F, 1.0F, 0F);
+            break;
+            
+        case GROUND: // На земле
+            poseStack.scale(0.8F, 0.8F, 0.8F);
+            poseStack.translate(0F, 1.0F, 0F);
+            break;
+            
+        case FIXED: // В рамке/item frame
+            poseStack.scale(1.0F, 1.0F, 1.0F);
+            poseStack.translate(0F, 1.0F, 0F);
+            break;
+            
+        case THIRD_PERSON_RIGHT_HAND:
+        case THIRD_PERSON_LEFT_HAND: // Вид от третьего лица
+            poseStack.mulPose(Axis.YP.rotationDegrees(180));
+            poseStack.mulPose(Axis.XP.rotationDegrees(10));
+            poseStack.translate(0.1F, -0.3F, -0.1F);
+            poseStack.scale(0.7F, 0.7F, 0.7F);
+            break;
+            
+        case FIRST_PERSON_RIGHT_HAND:
+        case FIRST_PERSON_LEFT_HAND: // Вид от первого лица
+            poseStack.mulPose(Axis.ZP.rotationDegrees(-15)); // Наклон в руке
+            poseStack.translate(0.4F, 0.6F, 0.3F);
+            poseStack.scale(0.6F, 0.6F, 0.6F);
+            break;
+            
+        default:
+            poseStack.scale(0.8F, 0.8F, 0.8F);
+            break;
+    }
         
         VertexConsumer vertexConsumer = ItemRenderer.getFoilBuffer(buffer, this.model.renderType(TEXTURE), false, stack.hasFoil());
         this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 0xFFFFFFFF);

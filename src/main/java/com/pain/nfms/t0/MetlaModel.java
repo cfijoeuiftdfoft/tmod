@@ -22,22 +22,46 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class MetlaModel extends Model {
     private final ModelPart root;
+    private final ModelPart stick;
+    private final ModelPart v0;
+    private final ModelPart v1;
+    private final ModelPart v2;
+    private final ModelPart v3;
 
     public MetlaModel(ModelPart root) {
         super(RenderType::entityCutoutNoCull);
-        this.root = root;
+        this.root = root.getChild("root");
+        this.stick = this.root.getChild("stick");
+        this.v0 = this.stick.getChild("v0");
+        this.v1 = this.stick.getChild("v1");
+        this.v2 = this.stick.getChild("v2");
+        this.v3 = this.stick.getChild("v3");
+
+        // this.v2.visible = false;
+        // this.v3.visible = false;
+        // this.v1.visible = false;
     }
 
+    @SuppressWarnings("null")
     public static LayerDefinition createLayer() {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition rroot = mesh.getRoot();
         
         PartDefinition root = rroot.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-        PartDefinition stick = root.addOrReplaceChild("stick", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -32.0F, -3.0F, 6.0F, 64.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition stick = root.addOrReplaceChild("stick", CubeListBuilder.create().texOffs(0, 26).addBox(-3.0F, -32.0F, -3.0F, 6.0F, 64.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-        stick.addOrReplaceChild("v0", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -10.0F, -3.0F, 20.0F, 20.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(-10.0F, 30.0F, 0.0F));
+        float r180 = (float)Math.toRadians(180.0F);
+        stick.addOrReplaceChild("v0", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-16.0F, -10.0F, -3.0F, 32.0F, 20.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 40.0F, 0.0F, r180, 0.0F, 0.0F));
+        stick.addOrReplaceChild("v1", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-16.0F, -10.0F, 0-3.0F, 32.0F, 20.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 40.0F, 0.0F, r180, (float)Math.toRadians(90.0F), 0.0F));
+
+        float r45 = (float)Math.toRadians(45);
+        float rn45 = (float)Math.toRadians(-45);
+        stick.addOrReplaceChild("v2", CubeListBuilder.create().texOffs(44, 6).mirror().addBox(-16.0F, -10.0F, 0.0F, 32.0F, 20.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 40.0F, 0.0F, r180, r45, 0.0F));
+        stick.addOrReplaceChild("v3", CubeListBuilder.create().texOffs(44, 6).mirror().addBox(-16.0F, -10.0F, 0.0F, 32.0F, 20.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 40.0F, 0.0F, r180, rn45, 0.0F));
+
         
-        return LayerDefinition.create(mesh, 16, 16);
+        int xy = 128;
+        return LayerDefinition.create(mesh, xy, xy);
     }
 
     @Override
