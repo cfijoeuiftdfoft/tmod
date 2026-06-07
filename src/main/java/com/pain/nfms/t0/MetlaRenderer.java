@@ -37,7 +37,7 @@ public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
             
         case GROUND: // На земле
             poseStack.scale(0.8F, 0.8F, 0.8F);
-            poseStack.translate(0F, 1.0F, 0F);
+            poseStack.translate(0.0F, 2.0F, 0.0F);
             break;
             
         case FIXED: // В рамке/item frame
@@ -63,7 +63,8 @@ public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
         default:
             poseStack.scale(0.8F, 0.8F, 0.8F);
             break;
-    }
+        }
+        poseStack.translate(-0.5F, -0.5F, -0.5F);
         
         VertexConsumer vertexConsumer = ItemRenderer.getFoilBuffer(buffer, this.model.renderType(TEXTURE), false, stack.hasFoil());
         this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 0xFFFFFFFF);
