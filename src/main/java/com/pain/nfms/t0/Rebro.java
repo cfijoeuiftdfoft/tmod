@@ -3,10 +3,10 @@ package com.pain.nfms.t0;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.network.protocol.game.ClientboundAnimatePacket;
-import net.minecraft.server.level.ServerChunkCache;
+// import net.minecraft.network.protocol.game.ClientboundAnimatePacket;
+// import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.InteractionHand;
+// import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
 
@@ -27,7 +27,7 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 // import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.monster.Monster;
+// import net.minecraft.world.entity.monster.Monster;
 // import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
@@ -51,7 +51,7 @@ public class Rebro extends TamableAnimal {
     }
 
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
+    public AgeableMob getBreedOffspring(@Nonnull ServerLevel level, @Nonnull AgeableMob otherParent) {
         Wolf wolf = (Wolf)EntityType.WOLF.create(level);
         if (wolf != null && otherParent instanceof Wolf) {
             if (this.isTame()) {
@@ -70,10 +70,7 @@ public class Rebro extends TamableAnimal {
 
     @Override
     public boolean doHurtTarget(@Nonnull Entity target) {
-        System.out.println("dohurttarget");
-        boolean hurt = super.doHurtTarget(target);
-        System.out.println(getCurrentSwingDuration());
-        return hurt;
+        return super.doHurtTarget(target);
     }
 
     @Override

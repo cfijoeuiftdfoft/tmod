@@ -31,13 +31,13 @@ public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
         
         switch (transformType) {
         case GUI: // Инвентарь
-            poseStack.scale(1.5F, 1.5F, 1.5F);
-            poseStack.translate(0F, 1.0F, 0F);
+            poseStack.scale(0.2F, 0.2F, 0.2F);
+            poseStack.translate(0F, 0.0F, 0F);
             break;
             
         case GROUND: // На земле
             poseStack.scale(0.8F, 0.8F, 0.8F);
-            poseStack.translate(0.0F, 2.0F, 0.0F);
+            poseStack.translate(0.0F, 2.0F, 0.6F);
             break;
             
         case FIXED: // В рамке/item frame
@@ -54,17 +54,16 @@ public class MetlaRenderer extends BlockEntityWithoutLevelRenderer {
             break;
             
         case FIRST_PERSON_RIGHT_HAND:
-        case FIRST_PERSON_LEFT_HAND: // Вид от первого лица
-            poseStack.mulPose(Axis.ZP.rotationDegrees(-15)); // Наклон в руке
-            poseStack.translate(0.4F, 0.6F, 0.3F);
-            poseStack.scale(0.6F, 0.6F, 0.6F);
+        case FIRST_PERSON_LEFT_HAND:
+            poseStack.translate(1.0F, 0.0F, 0.0F);
+            poseStack.scale(0.5F, 0.5F, 0.5F);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(90));
             break;
             
         default:
             poseStack.scale(0.8F, 0.8F, 0.8F);
             break;
         }
-        poseStack.translate(-0.5F, -0.5F, -0.5F);
         
         VertexConsumer vertexConsumer = ItemRenderer.getFoilBuffer(buffer, this.model.renderType(TEXTURE), false, stack.hasFoil());
         this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 0xFFFFFFFF);
