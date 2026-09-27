@@ -22,7 +22,7 @@ public class TEntities {
 
     public static final Supplier<EntityType<Rebro>> REBRO = ENTITIES.register("rebro",
         () -> EntityType.Builder.of(Rebro::new, MobCategory.MONSTER)
-        .sized(0.9f, 1.5f)
+        .sized(0.95f, 1.95f)
         .build("rebro")
     );
 }

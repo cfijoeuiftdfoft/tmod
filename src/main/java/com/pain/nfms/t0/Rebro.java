@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 // import net.minecraft.network.protocol.game.ClientboundAnimatePacket;
 // import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.DifficultyInstance;
 // import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.Entity;
@@ -13,8 +14,11 @@ import net.minecraft.world.entity.Entity;
 // import java.text.AttributedCharacterIterator.Attribute;
 
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 // import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.TamableAnimal;
 // import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -32,12 +36,15 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
 
 public class Rebro extends TamableAnimal {
     public Rebro(EntityType<? extends TamableAnimal> entityType, Level level) {
         super(entityType, level);
+        System.out.println("setItem                    SetItem");
+        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TItems.METLA.get()));
     }
 
     @Override
@@ -88,5 +95,20 @@ public class Rebro extends TamableAnimal {
     @SuppressWarnings("null")
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 67.0).add(Attributes.MOVEMENT_SPEED, 0.25F).add(Attributes.ATTACK_DAMAGE, 16000000.0F).add(Attributes.FOLLOW_RANGE, 10.0F);
+    }
+
+    @Override
+    public SpawnGroupData finalizeSpawn(@Nonnull ServerLevelAccessor level, @Nonnull DifficultyInstance difficulty, @Nonnull MobSpawnType reason, @Nullable SpawnGroupData spawnData) {
+        
+        // Вызываем родительский метод
+        SpawnGroupData data = super.finalizeSpawn(level, difficulty, reason, spawnData);
+        
+        // ТЕПЕРЬ даём предмет
+        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TItems.METLA.get()));
+        
+        // (Опционально) Чтобы предмет гарантированно выпадал при смерти:
+        this.setDropChance(EquipmentSlot.MAINHAND, 1.0f);
+        
+        return data;
     }
 }

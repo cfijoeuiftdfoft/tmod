@@ -31,8 +31,8 @@ public class RebroModel extends HierarchicalModel<Rebro> {
     private final ModelPart root;
     private final ModelPart head;
     private final ModelPart body;
-    private final ModelPart rightArm;
-    private final ModelPart leftArm;
+    public final ModelPart rightArm;
+    public final ModelPart leftArm;
     private final ModelPart right_wing;
     private final ModelPart left_wing;
     private final ModelPart rightLeg;

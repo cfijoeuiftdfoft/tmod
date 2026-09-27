@@ -17,6 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 // import net.minecraft.client.model.AllayModel;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 
 @OnlyIn(Dist.CLIENT)
 public class RebroRenderer extends MobRenderer<Rebro, RebroModel> {
@@ -25,6 +26,7 @@ public class RebroRenderer extends MobRenderer<Rebro, RebroModel> {
     @SuppressWarnings("null")
     public RebroRenderer(EntityRendererProvider.Context context) {
         super(context, new RebroModel(context.bakeLayer(TModelLayers.RebroModelLocation)), 0.5F);
+        this.addLayer(new HeldItemLayer(this));
     }
 
     @Override
