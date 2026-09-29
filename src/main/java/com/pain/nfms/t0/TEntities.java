@@ -17,12 +17,12 @@ import net.minecraft.world.entity.MobCategory;
 // import net.neoforged.fml.common.EventBusSubscriber;
 
 public class TEntities {
-    @SuppressWarnings("null")
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, tmod.MODID);
+	@SuppressWarnings("null")
+	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister
+			.create(BuiltInRegistries.ENTITY_TYPE, tmod.MODID);
 
-    public static final Supplier<EntityType<Rebro>> REBRO = ENTITIES.register("rebro",
-        () -> EntityType.Builder.of(Rebro::new, MobCategory.MONSTER)
-        .sized(0.95f, 1.95f)
-        .build("rebro")
-    );
+	public static final Supplier<EntityType<Rebro>> REBRO = ENTITIES.register("rebro",
+			() -> EntityType.Builder.of(Rebro::new, MobCategory.MONSTER)
+					.sized(0.95f, 1.95f)
+					.build("rebro"));
 }

@@ -19,27 +19,26 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 
 public class TItems {
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(tmod.MODID);
+	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(tmod.MODID);
 
-    @SuppressWarnings("null")
-    public static final DeferredItem<Item> METLA = ITEMS.register(
-        "metla",
-        () ->  new Metla(new Item.Properties()
-        .stacksTo(67)
-        .rarity(Rarity.RARE)
-        .attributes(ItemAttributeModifiers.builder()
-            .add(Attributes.ATTACK_DAMAGE,
-                 new AttributeModifier(
-                     ResourceLocation.fromNamespaceAndPath(tmod.MODID, "metla_damage"),
-                     5.0,
-                     AttributeModifier.Operation.ADD_VALUE
-                 ),
-                 EquipmentSlotGroup.MAINHAND)
-            .build())
-        .food(new FoodProperties.Builder()
-        .alwaysEdible()
-        .nutrition(1)
-        .saturationModifier(2f)
-        .build()), TEntities.REBRO.get()
-    ));
+	@SuppressWarnings("null")
+	public static final DeferredItem<Item> METLA = ITEMS.register(
+			"metla",
+			() -> new Metla(new Item.Properties()
+					.stacksTo(67)
+					.rarity(Rarity.RARE)
+					.attributes(ItemAttributeModifiers.builder()
+							.add(Attributes.ATTACK_DAMAGE,
+									new AttributeModifier(
+											ResourceLocation.fromNamespaceAndPath(tmod.MODID, "metla_damage"),
+											5.0,
+											AttributeModifier.Operation.ADD_VALUE),
+									EquipmentSlotGroup.MAINHAND)
+							.build())
+					.food(new FoodProperties.Builder()
+							.alwaysEdible()
+							.nutrition(1)
+							.saturationModifier(2f)
+							.build()),
+					TEntities.REBRO.get()));
 }

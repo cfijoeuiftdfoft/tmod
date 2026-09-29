@@ -21,28 +21,30 @@ import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 
 @OnlyIn(Dist.CLIENT)
 public class RebroRenderer extends MobRenderer<Rebro, RebroModel> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("tmod", "textures/entity/rebro.png");
+	private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("tmod",
+			"textures/entity/rebro.png");
 
-    @SuppressWarnings("null")
-    public RebroRenderer(EntityRendererProvider.Context context) {
-        super(context, new RebroModel(context.bakeLayer(TModelLayers.RebroModelLocation)), 0.5F);
-        this.addLayer(new HeldItemLayer(this));
-    }
+	@SuppressWarnings("null")
+	public RebroRenderer(EntityRendererProvider.Context context) {
+		super(context, new RebroModel(context.bakeLayer(TModelLayers.RebroModelLocation)), 0.5F);
+		this.addLayer(new HeldItemLayer(this));
+	}
 
-    @Override
-    public ResourceLocation getTextureLocation(@Nonnull Rebro entity) {
-        return TEXTURE;
-    }
+	@Override
+	public ResourceLocation getTextureLocation(@Nonnull Rebro entity) {
+		return TEXTURE;
+	}
 
-    @Override
-    public void render(@Nonnull Rebro entity, float entityYaw, float partialTick, @Nonnull PoseStack poseStack, @Nonnull MultiBufferSource buffer, int packedLight) {
-        this.model.setPartialTick(partialTick);
-        
-        super.render(entity, entityYaw, partialTick, poseStack, buffer, packedLight);
-    }
+	@Override
+	public void render(@Nonnull Rebro entity, float entityYaw, float partialTick, @Nonnull PoseStack poseStack,
+			@Nonnull MultiBufferSource buffer, int packedLight) {
+		this.model.setPartialTick(partialTick);
 
-    @Override
-    protected boolean shouldShowName(@Nonnull Rebro entity) {
-        return entity.hasCustomName();
-    }
+		super.render(entity, entityYaw, partialTick, poseStack, buffer, packedLight);
+	}
+
+	@Override
+	protected boolean shouldShowName(@Nonnull Rebro entity) {
+		return entity.hasCustomName();
+	}
 }

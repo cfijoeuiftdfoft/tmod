@@ -44,38 +44,40 @@ import net.neoforged.fml.ModContainer;
 
 @Mod(tmod.MODID)
 public class tmod {
-    public static final String MODID = "tmod";
-    public static final Logger LOGGER = LogUtils.getLogger();
+	public static final String MODID = "tmod";
+	public static final Logger LOGGER = LogUtils.getLogger();
 
-    public tmod(IEventBus modEventBus, ModContainer modContainer) {
-        modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::registerAttributes);
+	public tmod(IEventBus modEventBus, ModContainer modContainer) {
+		modEventBus.addListener(this::commonSetup);
+		modEventBus.addListener(this::registerAttributes);
 
-        TBlocks.BLOCKS.register(modEventBus);
-        TBlockItems.ITEMS.register(modEventBus);
-        TItems.ITEMS.register(modEventBus);
-        TCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
-        TEntities.ENTITIES.register(modEventBus);
+		TBlocks.BLOCKS.register(modEventBus);
+		TBlockItems.ITEMS.register(modEventBus);
+		TItems.ITEMS.register(modEventBus);
+		TCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
+		TEntities.ENTITIES.register(modEventBus);
 
-        NeoForge.EVENT_BUS.register(this);
-        modEventBus.addListener(this::addCreative);
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-    }
+		NeoForge.EVENT_BUS.register(this);
+		modEventBus.addListener(this::addCreative);
+		modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+	}
 
-    @SuppressWarnings("null")
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(TItems.METLA);
-        }
-    }
-    
-    @SuppressWarnings("null")
-    private void commonSetup(FMLCommonSetupEvent event) {}
+	@SuppressWarnings("null")
+	private void addCreative(BuildCreativeModeTabContentsEvent event) {
+		if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+			event.accept(TItems.METLA);
+		}
+	}
 
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {}
+	@SuppressWarnings("null")
+	private void commonSetup(FMLCommonSetupEvent event) {
+	}
 
-    public void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(TEntities.REBRO.get(), Rebro.createAttributes().build());
-    }
+	@SubscribeEvent
+	public void onServerStarting(ServerStartingEvent event) {
+	}
+
+	public void registerAttributes(EntityAttributeCreationEvent event) {
+		event.put(TEntities.REBRO.get(), Rebro.createAttributes().build());
+	}
 }

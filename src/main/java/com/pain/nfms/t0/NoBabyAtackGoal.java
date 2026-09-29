@@ -13,33 +13,31 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.npc.Villager;
 
 public class NoBabyAtackGoal<T extends LivingEntity> extends NearestAttackableTargetGoal<T> {
-    public NoBabyAtackGoal(Mob mob, Class<T> targetClass, boolean checkSight) {
-        super(mob, targetClass, checkSight);
-    }
+	public NoBabyAtackGoal(Mob mob, Class<T> targetClass, boolean checkSight) {
+		super(mob, targetClass, checkSight);
+	}
 
-        @Override
-        public boolean canUse() {
-        // Сначала находим ближайшую цель через super
-        if (!super.canUse()) {
-            return false;
-        }
-        
-        // Проверяем, является ли найденная цель ребенком-зомби
-        if (this.target != null && this.target instanceof Villager zombie && zombie.isBaby()) {
-            return true;
-        }
-        
-        return false;
-    }
+	@Override
+	public boolean canUse() {
+		if (!super.canUse()) {
+			return false;
+		}
 
-    @Override
-    protected boolean canAttack(@Nullable LivingEntity target, @Nonnull TargetingConditions conditions) {
-        // Базовая проверка (дистанция, жив ли и т.д.)
-        if (!super.canAttack(target, conditions)) {
-            return false;
-        }
-        
-        // Проверяем, что цель - ребенок зомби
-        return target instanceof AgeableMob zombie && zombie.isBaby();
-    }
+		// Проверяем, является ли найденная цель ребенком-зомби
+		if (this.target != null && this.target instanceof Villager zombie && zombie.isBaby()) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	protected boolean canAttack(@Nullable LivingEntity target, @Nonnull TargetingConditions conditions) {
+		if (!super.canAttack(target, conditions)) {
+			return false;
+		}
+
+		// Проверяем, что цель - ребенок зомби
+		return target instanceof AgeableMob zombie && zombie.isBaby();
+	}
 }

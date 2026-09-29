@@ -28,47 +28,39 @@ import net.minecraft.world.level.Level;
 // import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 public class Metla extends Item {
-    private final EntityType<?> entityType;
-    public Metla(Properties properties, EntityType<?> entityType) {
-        super(properties);
-        this.entityType = entityType;
-    }
-    
-    @Override
-    @SuppressWarnings("null")
-    public InteractionResult useOn(@Nonnull UseOnContext context) {
-        Level level = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        // BlockState oldState = level.getBlockState(pos);
-        Player player = context.getPlayer();
-        BlockPos spawnPos = pos.relative(context.getClickedFace());
-        if(level.isClientSide()) {
-            return InteractionResult.SUCCESS;
-        }
+	private final EntityType<?> entityType;
 
-        if(level instanceof ServerLevel serverLevel) {
-            entityType.spawn(serverLevel, null, player, spawnPos, MobSpawnType.SPAWN_EGG, true, false);
-            serverLevel.levelEvent(2007, spawnPos, 0);
-            if(player != null && !player.isCreative()) {
-                context.getItemInHand().shrink(1);
-            }
-        }
+	public Metla(Properties properties, EntityType<?> entityType) {
+		super(properties);
+		this.entityType = entityType;
+	}
 
-        return InteractionResult.SUCCESS;
-    }
+	@Override
+	@SuppressWarnings("null")
+	public InteractionResult useOn(@Nonnull UseOnContext context) {
+		Level level = context.getLevel();
+		BlockPos pos = context.getClickedPos();
+		// BlockState oldState = level.getBlockState(pos);
+		Player player = context.getPlayer();
+		BlockPos spawnPos = pos.relative(context.getClickedFace());
+		if (level.isClientSide()) {
+			return InteractionResult.SUCCESS;
+		}
 
-    // @Override
-    // public void postHurtEnemy(@Nonnull ItemStack stack, @Nonnull LivingEntity target, @Nonnull LivingEntity attacker) {
-    //     super.postHurtEnemy(stack, target, attacker);
-    //     // Этот метод вызывается после успешного удара предметом
-    //     target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 100, 1, false, true));
-    //     System.out.println("postHurt" + (stack != null) + (target != null) + (attacker != null));
-    // }
+		if (level instanceof ServerLevel serverLevel) {
+			entityType.spawn(serverLevel, null, player, spawnPos, MobSpawnType.SPAWN_EGG, true, false);
+			serverLevel.levelEvent(2007, spawnPos, 0);
+			if (player != null && !player.isCreative()) {
+				context.getItemInHand().shrink(1);
+			}
+		}
 
-    @Override
-   public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-     target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 100, 1, false, true));
-     System.out.println("hurtEnemy" + (stack != null) + (target != null) + (attacker != null));
-      return true;
-   }
+		return InteractionResult.SUCCESS;
+	}
+
+	@Override
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+		target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 100, 1, false, true));
+		return true;
+	}
 }

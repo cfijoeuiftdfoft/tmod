@@ -41,74 +41,76 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Wolf;
 
 public class Rebro extends TamableAnimal {
-    public Rebro(EntityType<? extends TamableAnimal> entityType, Level level) {
-        super(entityType, level);
-        System.out.println("setItem                    SetItem");
-        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TItems.METLA.get()));
-    }
+	public Rebro(EntityType<? extends TamableAnimal> entityType, Level level) {
+		super(entityType, level);
+		System.out.println("setItem                    SetItem");
+		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TItems.METLA.get()));
+	}
 
-    @Override
-    public boolean isFood(@Nonnull ItemStack fitem) {
-        return true;
-    }
+	@Override
+	public boolean isFood(@Nonnull ItemStack fitem) {
+		return true;
+	}
 
-    public void aiStep() {
-        this.updateSwingTime();
-        super.aiStep();
-    }
+	public void aiStep() {
+		this.updateSwingTime();
+		super.aiStep();
+	}
 
-    @Override
-    public AgeableMob getBreedOffspring(@Nonnull ServerLevel level, @Nonnull AgeableMob otherParent) {
-        Wolf wolf = (Wolf)EntityType.WOLF.create(level);
-        if (wolf != null && otherParent instanceof Wolf) {
-            if (this.isTame()) {
-                wolf.setOwnerUUID(this.getOwnerUUID());
-                wolf.setTame(true, true);
-            }
-        }
+	@Override
+	public AgeableMob getBreedOffspring(@Nonnull ServerLevel level, @Nonnull AgeableMob otherParent) {
+		Wolf wolf = (Wolf) EntityType.WOLF.create(level);
+		if (wolf != null && otherParent instanceof Wolf) {
+			if (this.isTame()) {
+				wolf.setOwnerUUID(this.getOwnerUUID());
+				wolf.setTame(true, true);
+			}
+		}
 
-        return wolf;
-    }
+		return wolf;
+	}
 
-    @Override
-    public boolean canMate(@Nullable Animal other) {
-        return true;
-    }
+	@Override
+	public boolean canMate(@Nullable Animal other) {
+		return true;
+	}
 
-    @Override
-    public boolean doHurtTarget(@Nonnull Entity target) {
-        return super.doHurtTarget(target);
-    }
+	@Override
+	public boolean doHurtTarget(@Nonnull Entity target) {
+		return super.doHurtTarget(target);
+	}
 
-    @Override
-    protected void registerGoals() {
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0f, Wolf.class));
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0f));
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, true));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8));
-        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(0, new NoBabyAtackGoal<>(this, Villager.class, true));
-    }
+	@Override
+	protected void registerGoals() {
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0f, Wolf.class));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0f));
+		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, true));
+		this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8));
+		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(0, new NoBabyAtackGoal<>(this, Villager.class, true));
+	}
 
-    @SuppressWarnings("null")
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 67.0).add(Attributes.MOVEMENT_SPEED, 0.25F).add(Attributes.ATTACK_DAMAGE, 16000000.0F).add(Attributes.FOLLOW_RANGE, 10.0F);
-    }
+	@SuppressWarnings("null")
+	public static AttributeSupplier.Builder createAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 67.0).add(Attributes.MOVEMENT_SPEED, 0.25F)
+				.add(Attributes.ATTACK_DAMAGE, 16000000.0F).add(Attributes.FOLLOW_RANGE, 10.0F);
+	}
 
-    @Override
-    public SpawnGroupData finalizeSpawn(@Nonnull ServerLevelAccessor level, @Nonnull DifficultyInstance difficulty, @Nonnull MobSpawnType reason, @Nullable SpawnGroupData spawnData) {
-        
-        // Вызываем родительский метод
-        SpawnGroupData data = super.finalizeSpawn(level, difficulty, reason, spawnData);
-        
-        // ТЕПЕРЬ даём предмет
-        this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TItems.METLA.get()));
-        
-        // (Опционально) Чтобы предмет гарантированно выпадал при смерти:
-        this.setDropChance(EquipmentSlot.MAINHAND, 1.0f);
-        
-        return data;
-    }
+	@Override
+	public SpawnGroupData finalizeSpawn(@Nonnull ServerLevelAccessor level, @Nonnull DifficultyInstance difficulty, @Nonnull MobSpawnType reason, @Nullable SpawnGroupData spawnData) {
+		SpawnGroupData data = super.finalizeSpawn(level, difficulty, reason, spawnData);
+
+		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(TItems.METLA.get()));
+
+		this.setDropChance(EquipmentSlot.MAINHAND, 1.0f);
+
+		return data;
+	}
+
+	@Override
+	public boolean isLeftHanded() {
+		return false;
+	}
 }
